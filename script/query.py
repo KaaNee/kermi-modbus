@@ -137,8 +137,9 @@ async def _run(
 
     from kermi_modbus import KermiDevice
 
-    # Kermi speaks native Modbus TCP (MBAP framing) -> framer="socket".
-    connection = await connect_tcp(host, port=port, framer="socket")
+    # Kermi speaks native Modbus TCP (MBAP framing); a Modbus TCP link is
+    # always MBAP-framed, so the framer argument is deprecated and omitted.
+    connection = await connect_tcp(host, port=port)
     try:
         xcenter_unit = connection.for_unit(xcenter_unit_id)
         heating_circuit_unit = (
